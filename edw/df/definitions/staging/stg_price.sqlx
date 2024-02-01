@@ -1,0 +1,12 @@
+config {
+  type: "table",
+  name: "price",
+  schema: "staging",
+  description: "Prices for product during period"
+}
+SELECT 
+      CAST(PRODUCT_ID   AS INTEGER) AS PRODUCT_ID
+    , CAST(PRICE        AS DECIMAL) AS PRICE
+    , CAST(START_DATE   AS DATE)    AS START_DATE
+    , CAST(END_DATE     AS DATE)    AS END_DATE
+FROM ${ ref("landing", "price") }

@@ -1,0 +1,7 @@
+config {
+  type: "declaration",
+  database: "dataform-tutorial-412218",
+  schema: "landing",
+  name: "product",
+  description: "Product raw date"
+}

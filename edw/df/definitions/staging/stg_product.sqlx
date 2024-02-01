@@ -1,0 +1,12 @@
+config {
+  type: "table",
+  name: "product",
+  schema: "staging",
+  description: "Product deteils"
+}
+SELECT 
+      CAST(ID           AS INTEGER) AS ID
+    , CAST(NAME         AS STRING)  AS NAME
+    , CAST(MANUFACTURE  AS STRING)  AS MANUFACTURE
+    , CAST(CREATE_DATE  AS DATE)    AS CREATE_DATE
+FROM ${ ref("landing", "product") }
