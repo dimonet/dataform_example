@@ -1,0 +1,16 @@
+config {
+  type: "table",
+  name: "product_price",
+  schema: "presentation",
+  description: "prices of product by periods"
+}
+SELECT 
+    p.ID                    AS PRODUCT_ID
+  , p.NAME                  AS PRODUCT_NAME
+  , p.MANUFACTURE           AS PRODUCT_MANUFACTURE
+  , IFNULL(c.PRICE, 0)      AS PRODUCT_PRICE
+  , IFNULL(c.START_DATE, CAST('1900-01-01' AS DATE)) AS PRICE_START_DATE
+  , IFNULL(c.END_DATE, CAST('2999-12-31' AS DATE))   AS PRICE_END_DATE
+FROM ${ ref("staging", "product") } p
+LEFT JOIN ${ ref("staging", "price") } c
+  ON p.ID = c.PRODUCT_ID

@@ -4,15 +4,13 @@ config {
   schema: "presentation",
   description: "Average prices of product"
 }
-SELECT 
-    p.ID          AS PRODUCT_ID
-  , p.NAME        AS PRODUCT_NAME
-  , p.MANUFACTURE AS PRODUCT_MANUFACTURE
-  , AVG(IFNULL(c.PRICE, 0))       AS AVG_PRODUCT_PRICE
-FROM ${ ref("staging", "product") } p
-LEFT JOIN ${ ref("staging", "price") } c
-  ON p.ID = c.PRODUCT_ID
-GROUP BY 
-    p.ID
-  , p.NAME
-  , p.MANUFACTURE  
+SELECT
+    PRODUCT_ID          AS PRODUCT_ID
+  , PRODUCT_NAME        AS PRODUCT_NAME
+  , PRODUCT_MANUFACTURE AS PRODUCT_MANUFACTURE
+  , AVG(PRODUCT_PRICE)  AS AVG_PRODUCT_PRICE
+FROM ${ ref("product_price") }
+GROUP BY
+    PRODUCT_ID
+  , PRODUCT_NAME
+  , PRODUCT_MANUFACTURE
