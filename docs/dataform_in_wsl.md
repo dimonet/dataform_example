@@ -93,3 +93,17 @@
     ```shell  
     dataform run
     ```
+
+### Shutdown WSL session
+1. In the PowerShsell
+   ```shell
+   wsl --list --running
+   ```
+2. Find the session's name and terminate it 
+   ```shell
+   wsl -t Ubuntu
+   ```
+3. Or shutdown all existed session 
+   ```shell
+   wsl --shutdown
+   ```  
