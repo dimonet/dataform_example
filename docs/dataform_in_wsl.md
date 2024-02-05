@@ -19,9 +19,9 @@
       mkdir git
       ``` 
 
-   2. Edit ~/.bashrc to docker auto run
+   2. Edit ~/.profile to worked folder mounting
       ```shell
-      nano ~/.bashrc       
+      nano ~/.profile       
       ```
       Add the next string at the end of the config file:      
         ```
