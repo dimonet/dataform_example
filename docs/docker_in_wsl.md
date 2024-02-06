@@ -6,17 +6,44 @@ https://nickjanetakis.com/blog/install-docker-in-wsl-2-without-docker-desktop
 2. Type "optionalfeatures" in the search box
 3. Turn On "Hyper-V" checkbox
 
+
 ### Install and configure WSL on a local PC
 1. Instal WSL on a local PC (Windows PowerShell by Administrator)
     ```shell
     wsl --install -d ubuntu
     ```
+
+
 2. Edit etc/sudoers to password entering disable
     ```shell
     sudo nano /etc/sudoers
     ```
     Add the next string at the end of the config file:   
     `dbuza ALL=(ALL) NOPASSWD: ALL` 
+
+
+3. Global configuration for the WSL (optional)
+   1. Create file .wslconfig in folder C:\Users\<UserName> in the Windows
+   2. Add the next string in the file .wslconfig:
+      ```
+      # Settings apply across all Linux distros running on WSL 2
+      [wsl2]   
+      
+      # Limits VM memory to use no more than 4 GB, this can be set as whole numbers using GB or MB
+      memory=16GB 
+   
+      # Sets the VM to use two virtual processors
+      processors=8
+      ```
+   3. Restart WSL (in a PowerShell of Windows):
+      ```shell
+      wsl --shutdown
+      ```
+   4. Check using the next command in the Ubuntu(Linux)
+      ```shell
+      htop
+      ``` 
+
 
 ### Install and configure Docker in the WSL
 1. Uninstall Docker Desktop  
@@ -26,6 +53,7 @@ https://nickjanetakis.com/blog/install-docker-in-wsl-2-without-docker-desktop
    lrwxrwxrwx  1 nick nick   35 Aug 21 17:24 features.json -> /c/Users/Nick/.docker/features.json
    ```
    Uninstalling Docker Desktop will not remove those Windows paths so things will technically still work but if you ever delete them later you’ll end getting Docker endpoint for "default" not found errors when you try to run most Docker commands within WSL 2 since the symlinks will have no destination.
+
 
 2. Install Docker / Docker Compose v2 in WSL 2
    1. Install Docker, you can ignore the warning from Docker about using WSL
@@ -46,11 +74,14 @@ https://nickjanetakis.com/blog/install-docker-in-wsl-2-without-docker-desktop
       ```shell
       docker compose version
       ```
+
+
 3. Set iptables compatibility
    ```shel
    sudo update-alternatives --config iptables
    ```
    select iptables-legacy
+
 
 4. Edit ~/.profile to docker auto run
    ```shell
@@ -66,10 +97,13 @@ https://nickjanetakis.com/blog/install-docker-in-wsl-2-without-docker-desktop
        fi
    fi
    ```
+
+
 5. Check that Docker daemon running
    ```shell
    ps aux | grep docker
    ```
+
 
 6. Test docker after cloasing current and opening a new terminal
    ```shell

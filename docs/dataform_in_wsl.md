@@ -13,7 +13,30 @@
     `dbuza ALL=(ALL) NOPASSWD: ALL` 
 
 
-3. Mounting worked Windows folder ot the home WSL directory
+3. Global configuration for the WSL (optional)
+   1. Create file .wslconfig in folder C:\Users\<UserName> in the Windows
+   2. Add the next string in the file .wslconfig:
+      ```
+      # Settings apply across all Linux distros running on WSL 2
+      [wsl2]   
+      
+      # Limits VM memory to use no more than 4 GB, this can be set as whole numbers using GB or MB
+      memory=16GB 
+   
+      # Sets the VM to use two virtual processors
+      processors=8
+      ```
+   3. Restart WSL (in a PowerShell of Windows):
+      ```shell
+      wsl --shutdown
+      ```
+   4. Check using the next command in the Ubuntu(Linux)
+      ```shell
+      htop
+      ``` 
+      
+
+4. Mounting worked Windows folder to the home WSL directory (optional)
    1. Create a new directory (e.g. 'git')  
       ```shell
       mkdir git
@@ -31,7 +54,8 @@
         sudo mount -t drvfs $win_dir $wsl_dir -o "umask=077,rw,noatime,dirsync,mmap,access=client,msize=262144,trans=virtio"
         ```
 
-3. Install nodejs(npm)
+
+5. Install nodejs(npm)
    1. Install nodejs 
       ```shell
        sudo apt install npm
@@ -47,12 +71,14 @@
       sudo n stable
       ```
  
-2. Install dataform
+
+6. Install dataform
     ```shell
     sudo npm i -g @dataform/cli                         
     ```
 
-3. Instal and configure Cloud SDK using the next command:
+
+7. Instal and configure Cloud SDK using the next command:
     1. Gcloud Initialising
         ```shell
         gcloud init
@@ -61,12 +87,14 @@
         ```shell
         gcloud auth application-default login               	
 
+
 ### Run Dataform on a local PC
 
 1. Create a new Dataform project
     ```shell
     dataform init bigquery cdw --default-database dataform-tutorial-412218 --default-location us-central1
     ```
+   
 2. Create a credentials file  .df-credentials.json
     ```shell
     cd dataform_example/edw/df    
@@ -91,15 +119,20 @@
     dataform run
     ```
 
+
 ### Shutdown WSL session
 1. In the PowerShsell
    ```shell
    wsl --list --running
    ```
+  
+ 
 2. Find the session's name and terminate it 
    ```shell
    wsl -t Ubuntu
    ```
+   
+
 3. Or shutdown all existed session 
    ```shell
    wsl --shutdown
