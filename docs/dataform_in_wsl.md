@@ -51,7 +51,10 @@
         # mount git folder
         win_dir=D:/dev_envs/dimonet/GIT
         wsl_dir=/home/dbuza/git
-        sudo mount -t drvfs $win_dir $wsl_dir -o "umask=077,rw,noatime,dirsync,mmap,access=client,msize=262144,trans=virtio"
+        sudo mount -t drvfs $win_dir $wsl_dir -o "metadata,rw,noatime,dirsync,mmap,access=client,msize=262144,trans=virtio"
+        # Change permision
+        sudo chown -R root:$(whoami) $wsl_dir
+        sudo chmod -R 775 $wsl_dir
         ```
 
 
