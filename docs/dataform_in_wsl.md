@@ -58,40 +58,36 @@
         ```
 
 
-5. Install nodejs(npm)
-   1. For "Ubuntu" image 
-    
-      1. Install nodejs 
-         ```shell
-          sudo apt install npm
-         ``` 
-      2. Update version of the nodejs
-         ```shell
-         sudo npm cache clean -f
-         ```
-         ```shell
-         sudo npm install -g n
-         ```
-         ```shell
-         sudo n stable
-         ```
-   2. For "Ubuntu 20.04.6 LTS" image
-      1. Update apt-get
-         ```shell
-         sudo apt-get update
-         ```
-         ```shell
-         sudo apt-get upgrade
-         ```
-      2. Install npm
-         ```shell
-         sudo apt-get install npm
-         ``` 
-      
+5. Install nodejs(npm)    
+   1. Install nodejs 
+      ```shell
+       sudo apt install npm
+      ```
+   2. If you got error: ```E: Unable to locate package npm```, try to update apt-get
+      ```shell
+      sudo apt-get update
+      ```
+      ```shell
+      sudo apt-get upgrade
+      ```
+      ```shell
+      sudo apt-get install npm
+      ``` 
+   3. Update version of the nodejs
+      ```shell
+      sudo npm cache clean -f
+      ```
+      ```shell
+      sudo npm install -g n
+      ```
+      ```shell
+      sudo n stable
+      ```   
+
 
 6. Install dataform
     ```shell
-    sudo npm i -g @dataform/cli                         
+    sudo npm i -g @dataform/cli
     ```
 
 
