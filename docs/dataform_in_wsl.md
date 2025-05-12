@@ -26,15 +26,23 @@
       # Sets the VM to use two virtual processors
       processors=8
       ```
-   3. Restart WSL (in a PowerShell of Windows):
+   3. Drop and recreate /etc/resolv.conf file with default DNS servers
+      ```shell
+      sudo rm /etc/resolv.conf      
+      echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" | sudo tee /etc/resolv.conf
+      ```
+   4. Add the next config to the '/etc/wsl.conf' file to prohibit automatic overwriting of resolv.conf file
+      ```shell
+      sudo nano /etc/wsl.conf   
+      ```
+   5. Restart WSL (in a PowerShell of Windows):
       ```shell
       wsl --shutdown
       ```
-   4. Check using the next command in the Ubuntu(Linux)
+   6. Check using the next command in the Ubuntu(Linux)
       ```shell
       htop
-      ``` 
-      
+      ```
 
 4. Mounting worked Windows folder to the home WSL directory (optional)
    1. Create a new directory (e.g. 'git')  
@@ -55,8 +63,7 @@
         # Change permision
         sudo chown -R root:$(whoami) $wsl_dir
         sudo chmod -R 775 $wsl_dir
-        ```
-
+        ``` 
 
 5. Install nodejs(npm)    
    1. Install nodejs 
