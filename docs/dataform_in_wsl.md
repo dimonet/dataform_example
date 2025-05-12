@@ -33,8 +33,13 @@
       ```
    4. Add the next config to the '/etc/wsl.conf' file to prohibit automatic overwriting of resolv.conf file
       ```shell
-      sudo nano /etc/wsl.conf   
+      sudo nano /etc/wsl.conf       
       ```
+      ```int
+      [network]
+      generateResolvConf = false
+      ```
+      
    5. Restart WSL (in a PowerShell of Windows):
       ```shell
       wsl --shutdown
