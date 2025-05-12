@@ -38,8 +38,7 @@
       ```int
       [network]
       generateResolvConf = false
-      ```
-      
+      ```      
    5. Restart WSL (in a PowerShell of Windows):
       ```shell
       wsl --shutdown
