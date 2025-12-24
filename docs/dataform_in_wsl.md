@@ -31,13 +31,18 @@
       sudo rm /etc/resolv.conf      
       echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" | sudo tee /etc/resolv.conf
       ```
-   4. Add the next config to the '/etc/wsl.conf' file to prohibit automatic overwriting of resolv.conf file
+   4. Add the next config to the '/etc/wsl.conf' file to prohibit automatic overwriting of resolv.conf file and auto mounting Windows folders (Windows folders will be mounted in the /mnt/)
       ```shell
       sudo nano /etc/wsl.conf       
       ```
       ```int
       [network]
       generateResolvConf = false
+      
+      [automount]
+      enabled = true
+      root = /mnt/
+      options = "metadata,umask=0022,fmask=0011"
       ```      
    5. Restart WSL (in a PowerShell of Windows):
       ```shell
@@ -48,28 +53,7 @@
       htop
       ```
 
-4. Mounting worked Windows folder to the home WSL directory (optional)
-   1. Create a new directory (e.g. 'git')  
-      ```shell
-      mkdir git
-      ``` 
-
-   2. Edit ~/.profile to worked folder mounting
-      ```shell
-      nano ~/.profile       
-      ```
-      Add the next string at the end of the config file:      
-        ```
-        # mount git folder
-        win_dir=D:/dev_envs/dimonet/GIT
-        wsl_dir=/home/dbuza/git
-        sudo mount -t drvfs $win_dir $wsl_dir -o "metadata,rw,noatime,dirsync,mmap,access=client,msize=262144,trans=virtio"
-        # Change permision
-        sudo chown -R root:$(whoami) $wsl_dir
-        sudo chmod -R 775 $wsl_dir
-        ``` 
-
-5. Install nodejs(npm)    
+4. Install nodejs(npm)    
    1. Install nodejs 
       ```shell
        sudo apt install npm
@@ -96,13 +80,13 @@
       ```   
 
 
-6. Install dataform
+5. Install dataform
     ```shell
     sudo npm i -g @dataform/cli
     ```
 
 
-7. Instal and configure Cloud SDK using the next command:
+6. Instal and configure Cloud SDK using the next command:
     1. Gcloud Initialising
         ```shell
         gcloud init
@@ -131,7 +115,7 @@
 
 3. Dataform run model
     ```shell
-    cd GIT/dataform_example/edw/df
+    cd /mnt/d/dev_envs/dimonet/GIT/dataform_example/edw/df
     ```
     ```shell
     dataform compile
